@@ -6,10 +6,20 @@ import { MathUtils } from "three";
 import { skibidiAtom } from "./UI";
 export const Experience = () => {
 
+  const kebabs = useRef();
+  const [skibidi] = useAtom(skibidiAtom);
+  useFrame(({}) => {
+    kebabs.current.rotation.y += 0.01;
+    kebabs.current.scale.x =
+      kebabs.current.scale.y =
+      kebabs.current.scale.z =
+        MathUtils.lerp(kebabs.current.scale.x, skibidi ? 1 : 100, 0.1);
+  });
 
   return (
     <>
       <Environment preset="sunset" />
+      <group ref={kebabs}>
         <Float
           position={[2.5, 1, 1]}
           speed={6}
@@ -34,6 +44,8 @@ export const Experience = () => {
         >
           <Gltf scale={0.2} src="/models/Kebab.glb" castShadow />
         </Float>
+        </group>
+
      
     </>
   );
