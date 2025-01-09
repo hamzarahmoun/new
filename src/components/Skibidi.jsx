@@ -54,6 +54,10 @@ export function Skibidi({ animation, ...props }) {
       wiggleBone.update();
     });
   });
+  useEffect(() => {
+    actions[animation]?.fadeIn(0.5).play();
+    return () => actions[animation]?.fadeOut(0.5).stop();
+  }, [actions, animation]);
   return (
     <group {...props}>
       <group ref={group} dispose={null}>
