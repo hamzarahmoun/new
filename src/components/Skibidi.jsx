@@ -8,7 +8,52 @@ import { wiggleAtom } from "./UI";
 export function Skibidi({ animation, ...props }) {
   const group = useRef();
   const { nodes, scene, animations } = useGLTF(`/models/skibidi.glb`);
- 
+  const { actions } = useAnimations(animations, group);
+
+  const [wiggle] = useAtom(wiggleAtom);
+  const wiggleBones = useRef([]);
+
+  useEffect(() => {
+    scene.traverse((node) => {
+      if (node.isMesh) {
+        node.castShadow = true;
+      }
+    });
+  }, [scene]);
+   useEffect(() => {
+    wiggleBones.current.length = 0;
+
+    if (!wiggle) {
+      return;
+    }
+
+    ["Belly01"].forEach((rootBone) => {
+      if (!nodes[rootBone]) {
+        return;
+      }
+      nodes[rootBone].traverse((bone) => {
+        if (bone.isBone) {
+          const wiggleBone = new WiggleBone(bone, {
+            damping: 10,
+            stiffness: 300,
+          });
+          wiggleBones.current.push(wiggleBone);
+        }
+      });
+    });
+
+    return () => {
+      wiggleBones.current.forEach((wiggleBone) => {
+        wiggleBone.reset();
+        wiggleBone.dispose();
+      });
+    };
+  }, [nodes, wiggle]);
+  useFrame(() => {
+    wiggleBones.current.forEach((wiggleBone) => {
+      wiggleBone.update();
+    });
+  });
   return (
     <group {...props}>
       <group ref={group} dispose={null}>
