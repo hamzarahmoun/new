@@ -4,6 +4,7 @@ import { useAtom } from "jotai";
 import { useRef } from "react";
 import { MathUtils } from "three";
 import { skibidiAtom } from "./UI";
+import { Skibidi } from "./Skibidi";
 export const Experience = () => {
 
   const kebabs = useRef();
@@ -45,6 +46,9 @@ export const Experience = () => {
           <Gltf scale={0.2} src="/models/Kebab.glb" castShadow />
         </Float>
         </group>
+        <TransformControls mode="translate" position-y={1}>
+        <Skibidi animation={skibidi ? "Dance" : "Waving"} position-y={-1} />
+      </TransformControls>
 
      
     </>
