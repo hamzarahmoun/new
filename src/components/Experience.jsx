@@ -51,6 +51,7 @@ export const Experience = () => {
       </TransformControls>
       <directionalLight position={[0, 2, 5]} intensity={2.5} castShadow />
       <pointLight position={[0, 1, 2]} intensity={20.5} />
+      <directionalLight position={[-1, 0, -5]} intensity={5} color={"red"} />
 
 
      
