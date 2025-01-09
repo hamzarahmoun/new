@@ -49,6 +49,9 @@ export const Experience = () => {
         <TransformControls mode="translate" position-y={1}>
         <Skibidi animation={skibidi ? "Dance" : "Waving"} position-y={-1} />
       </TransformControls>
+      <directionalLight position={[0, 2, 5]} intensity={2.5} castShadow />
+      <pointLight position={[0, 1, 2]} intensity={20.5} />
+
 
      
     </>
