@@ -10,8 +10,8 @@ function App() {
       <UI/>
       <Loader />
       <Canvas shadows camera={{ position: [-2, 1, 5], fov: 30 }}>
-        <color attach="background" args={["#501899"]} />
-        <fog attach="fog" args={["#501899", 5, 20]} />
+        <color attach="background" args={["#FF4500"]} /> {/* OrangeRed */}
+        <fog attach="fog" args={["#FF4500", 5, 20]} /> {/* OrangeRed */}
         <group position-y={-1}>
           <Suspense fallback={null}>
             <Experience />
